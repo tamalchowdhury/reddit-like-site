@@ -25,3 +25,43 @@ body {
   grid-template-columns: 7fr 3fr;
   grid-gap: 10px;
 }
+
+/* Reddit posts area  */
+
+/* Post component  */
+
+.post {
+  display: grid;
+  grid-template-columns: 1fr 1fr 8fr;
+  grid-gap: 5px;
+  margin-bottom: 10px;
+}
+
+.title-area {
+}
+
+.title {
+  font-size: 1.2rem;
+}
+
+.title a {
+  text-decoration: none;
+}
+
+.title a:hover {
+  text-decoration: underline;
+}
+
+.url {
+  padding-left: 5px;
+}
+.url,
+.meta-area,
+.link-area {
+  color: gray;
+  font-size: 0.8rem;
+}
+
+.link-area {
+  font-weight: bold;
+}
