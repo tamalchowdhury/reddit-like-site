@@ -48,7 +48,6 @@ class App extends Component {
 
   upVote = (key) => {
     let messages = [...this.state.messages];
-    let id = messages[key]._id;
     let votes = messages[key].votes++;
     fetch('./api/upvote', {
       method: 'POST',
@@ -56,8 +55,15 @@ class App extends Component {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ id, votes })
-    });
+      body: JSON.stringify({ id: key, votes })
+    })
+      .then((res) => console.log(res))
+      .then(console.log('Posted to database'))
+      .catch((err) => {
+        if (err) {
+          console.log(err.message);
+        }
+      });
 
     // this.setState({ messages });
   };
@@ -92,10 +98,10 @@ class App extends Component {
         <div className="header">Header</div>
         <div className="container">
           <div className="posts">
-            {this.state.messages.map((post, index) => (
+            {this.state.messages.map((post) => (
               <Post
-                key={index}
-                index={index}
+                key={post._id}
+                index={post._id}
                 post={post}
                 upVote={this.upVote}
                 downVote={this.downVote}

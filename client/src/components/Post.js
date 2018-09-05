@@ -1,16 +1,17 @@
 import React from 'react';
+import moment from 'moment';
 
 const Post = ({ post, upVote, downVote, index }) => {
   return (
     <div className="post">
       <div className="votes">
-        <div className="upvote" onClick={() => upVote(index)}>
+        <div className="upvote" onClick={() => upVote(post.key)}>
           <span role="img" aria-label="up vote">
             ⬆️
           </span>
         </div>
         <div className="votecount">{post.votes}</div>
-        <div className="downvote" onClick={() => downVote(index)}>
+        <div className="downvote" onClick={() => downVote(post.key)}>
           <span role="img" aria-label="down vote">
             ⬇️
           </span>
@@ -26,7 +27,7 @@ const Post = ({ post, upVote, downVote, index }) => {
         </div>
         <div className="meta-area">
           <span className="time">
-            Submitted 9 hours ago by {post.author} to r/node
+            Submitted {moment(post.posted).fromNow()} by {post.author} to r/node
           </span>
         </div>
         <div className="link-area">
