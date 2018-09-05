@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #dddddd;
+  line-height: 1.6em;
+}
+
+.app {
+  background: #ffffff;
+  width: 1000px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.header,
+.container,
+.footer {
+  padding: 10px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 7fr 3fr;
+  grid-gap: 10px;
+}
