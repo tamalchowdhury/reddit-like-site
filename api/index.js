@@ -21,4 +21,16 @@ router.post('/post', async (req, res) => {
   }
 });
 
+router.post('/upvote', async (req, res) => {
+  try {
+    const post = await Post.findOneAndUpdate({ _id: req.body.id }, req.body, {
+      new: true,
+      runValidators: true
+    });
+    res.sendStatus(200);
+  } catch (error) {
+    res.sendStatus(404);
+  }
+});
+
 module.exports = router;

@@ -7,18 +7,19 @@ import data from './newdata';
 
 class App extends Component {
   state = {
-    messages: []
+    messages: [],
+    updated: false
   };
 
   postToDatabase(post) {
-    fetch('/api/post', {
+    fetch('./api/post', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(post)
-    });
+    }).then(this.setState({ updated: false }));
   }
 
   newPost = (e) => {
@@ -26,8 +27,8 @@ class App extends Component {
     let title = e.target.title.value;
     let body = e.target.body.value;
 
-    if (title && body) {
-      let messages = [...this.state.messages];
+    if (title) {
+      // let messages = [...this.state.messages];
       let data = {};
       data.title = title;
       data.body = body;
@@ -35,11 +36,9 @@ class App extends Component {
       data.posted = Date.now();
       data.votes = 1;
 
+      // messages.push(data);
+      // this.setState({ messages });
       this.postToDatabase(data);
-
-      messages.push(data);
-
-      this.setState({ messages });
 
       e.target.reset();
     }
@@ -49,8 +48,18 @@ class App extends Component {
 
   upVote = (key) => {
     let messages = [...this.state.messages];
-    messages[key].votes++;
-    this.setState({ messages });
+    let id = messages[key]._id;
+    let votes = messages[key].votes++;
+    fetch('./api/upvote', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id, votes })
+    });
+
+    // this.setState({ messages });
   };
 
   downVote = (key) => {
@@ -60,18 +69,20 @@ class App extends Component {
   };
 
   componentDidUpdate() {
-    fetch('./api/all')
-      .then((res) => res.json())
-      .then((messages) => {
-        this.setState({ messages });
-      });
+    if (!this.state.updated) {
+      fetch('./api/all')
+        .then((res) => res.json())
+        .then((messages) => {
+          this.setState({ messages, updated: true });
+        });
+    }
   }
 
   componentDidMount() {
     fetch('./api/all')
       .then((res) => res.json())
       .then((messages) => {
-        this.setState({ messages });
+        this.setState({ messages, updated: true });
       });
   }
 
