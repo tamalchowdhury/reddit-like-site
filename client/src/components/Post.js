@@ -1,27 +1,36 @@
 import React from 'react';
 
-const Post = ({ post }) => {
+const Post = ({ post, upVote, downVote, index }) => {
   return (
     <div className="post">
-      <div className="votes">10</div>
+      <div className="votes">
+        <div className="upvote" onClick={() => upVote(index)}>
+          <span role="img" aria-label="up vote">
+            ⬆️
+          </span>
+        </div>
+        <div className="votecount">{post.votes}</div>
+        <div className="downvote" onClick={() => downVote(index)}>
+          <span role="img" aria-label="down vote">
+            ⬇️
+          </span>
+        </div>
+      </div>
       <div className="media">Some image</div>
       <div className="content">
         <div className="title-area">
           <span className="title">
-            <a href={post.data.url}>{post.data.title} </a>
+            <a href="#">{post.title} </a>
           </span>
-          <span className="url">({post.data.domain})</span>
+          <span className="url">(domain)</span>
         </div>
         <div className="meta-area">
           <span className="time">
-            Submitted 9 hours ago by {post.data.name} to r/node
+            Submitted 9 hours ago by {post.author} to r/node
           </span>
         </div>
         <div className="link-area">
-          <span>
-            {post.data.num_comments} comments share save hide give gold report
-            crosspost
-          </span>
+          <span>5 comments share save hide give gold report crosspost</span>
         </div>
       </div>
     </div>

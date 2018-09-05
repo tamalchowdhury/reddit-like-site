@@ -37,6 +37,30 @@ body {
   margin-bottom: 10px;
 }
 
+/* Votes  */
+
+.votes {
+  text-align: center;
+  color: #cccccc;
+  line-height: 1.2rem;
+}
+
+.upvote,
+.votecount,
+.downvote {
+}
+
+.upvote,
+.downvote {
+  font-weight: bold;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.votecount {
+  font-size: 1.2rem;
+}
+
 .title-area {
 }
 
@@ -64,4 +88,15 @@ body {
 
 .link-area {
   font-weight: bold;
+}
+
+/* User area for logging in and posting stuff  */
+
+.post-box {
+}
+
+.post-form input,
+.post-form textarea {
+  display: block;
+  margin-bottom: 10px;
 }
