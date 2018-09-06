@@ -46,26 +46,52 @@ class App extends Component {
     console.log(title);
   };
 
-  upVote = (key) => {
+  vote = (key, index, isUpvote) => {
     let messages = [...this.state.messages];
-    let votes = messages[key].votes++;
-    fetch('./api/upvote', {
+    let votes = messages[index].votes;
+    if (isUpvote) {
+      votes++;
+    } else {
+      votes--;
+    }
+    let id = key;
+
+    fetch('./api/vote', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ id: key, votes })
+      body: JSON.stringify({ id, votes })
     })
-      .then((res) => console.log(res))
-      .then(console.log('Posted to database'))
+      .then((res) => this.setState({ messages, updated: false }))
       .catch((err) => {
         if (err) {
           console.log(err.message);
         }
       });
+  };
 
-    // this.setState({ messages });
+  upVote = (key, index) => {
+    let messages = [...this.state.messages];
+    let votes = messages[index].votes;
+    votes++;
+    let id = key;
+
+    fetch('./api/vote', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id, votes })
+    })
+      .then((res) => this.setState({ messages, updated: false }))
+      .catch((err) => {
+        if (err) {
+          console.log(err.message);
+        }
+      });
   };
 
   downVote = (key) => {
@@ -98,14 +124,8 @@ class App extends Component {
         <div className="header">Header</div>
         <div className="container">
           <div className="posts">
-            {this.state.messages.map((post) => (
-              <Post
-                key={post._id}
-                index={post._id}
-                post={post}
-                upVote={this.upVote}
-                downVote={this.downVote}
-              />
+            {this.state.messages.map((post, index) => (
+              <Post key={post._id} index={index} post={post} vote={this.vote} />
             ))}
           </div>
           <div className="user">

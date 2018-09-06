@@ -21,14 +21,18 @@ router.post('/post', async (req, res) => {
   }
 });
 
-router.post('/upvote', async (req, res) => {
+router.post('/vote', async (req, res) => {
   try {
     const post = await Post.findOneAndUpdate({ _id: req.body.id }, req.body, {
       new: true,
       runValidators: true
     });
-    res.sendStatus(200);
+    // res.sendStatus(200);
+    res.json(req.body);
   } catch (error) {
+    if (error) {
+      console.log(error.message);
+    }
     res.sendStatus(404);
   }
 });

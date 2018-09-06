@@ -1,17 +1,17 @@
 import React from 'react';
 import moment from 'moment';
 
-const Post = ({ post, upVote, downVote, index }) => {
+const Post = ({ post, vote, index }) => {
   return (
     <div className="post">
       <div className="votes">
-        <div className="upvote" onClick={() => upVote(post.key)}>
+        <div className="upvote" onClick={() => vote(post._id, index, true)}>
           <span role="img" aria-label="up vote">
             ⬆️
           </span>
         </div>
         <div className="votecount">{post.votes}</div>
-        <div className="downvote" onClick={() => downVote(post.key)}>
+        <div className="downvote" onClick={() => vote(post._id, index, false)}>
           <span role="img" aria-label="down vote">
             ⬇️
           </span>
