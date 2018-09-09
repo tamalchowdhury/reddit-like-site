@@ -1,10 +1,11 @@
 const router = require('express').Router();
-const Message = require('../models/Message');
 const Post = require('../models/Post');
 
 router.get('/all', async (req, res) => {
   try {
-    const posts = await Post.find({}).sort({ posted: -1 });
+    const posts = await Post.find({})
+      .limit(25)
+      .sort({ posted: -1 });
     res.send(posts);
   } catch (error) {
     res.sendStatus(404);

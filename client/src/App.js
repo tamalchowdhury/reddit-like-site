@@ -28,7 +28,6 @@ class App extends Component {
     let body = e.target.body.value;
 
     if (title) {
-      // let messages = [...this.state.messages];
       let data = {};
       data.title = title;
       data.body = body;
@@ -70,34 +69,6 @@ class App extends Component {
           console.log(err.message);
         }
       });
-  };
-
-  upVote = (key, index) => {
-    let messages = [...this.state.messages];
-    let votes = messages[index].votes;
-    votes++;
-    let id = key;
-
-    fetch('./api/vote', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ id, votes })
-    })
-      .then((res) => this.setState({ messages, updated: false }))
-      .catch((err) => {
-        if (err) {
-          console.log(err.message);
-        }
-      });
-  };
-
-  downVote = (key) => {
-    let messages = [...this.state.messages];
-    messages[key].votes--;
-    this.setState({ messages });
   };
 
   componentDidUpdate() {
