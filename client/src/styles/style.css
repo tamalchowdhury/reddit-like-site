@@ -7,6 +7,11 @@ body {
   line-height: 1.6em;
 }
 
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
 .app {
   background: #ffffff;
   width: 1000px;
@@ -14,16 +19,52 @@ body {
   margin: 0 auto;
 }
 
-.header,
-.container,
+.header {
+  padding: 10px 30px 0 30px;
+}
 .footer {
-  padding: 10px;
+  padding: 10px 30px;
+}
+
+/* Header section */
+.header {
+  background: #c6e2ff;
+  display: grid;
+  grid-template-columns: 7fr 3fr;
+}
+
+.site-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.user-info {
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+.user-meta {
+  background: #e8f3ff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.logout-btn:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.header-form input {
+  font-size: 0.8rem;
+  margin-right: 10px;
 }
 
 .container {
   display: grid;
-  grid-template-columns: 7fr 3fr;
+  grid-template-columns: 6fr 4fr;
   grid-gap: 10px;
+  padding: 30px 30px 10px 10px;
 }
 
 /* Reddit posts area  */
@@ -92,11 +133,47 @@ body {
 
 /* User area for logging in and posting stuff  */
 
+.post-box,
+.guest-msg {
+  padding: 10px 20px;
+}
+
 .post-box {
+  background: #c6e2ff;
+  border-radius: 3px;
+}
+
+.guest-msg {
+  background: #fffde7;
+  font-weight: bold;
 }
 
 .post-form input,
 .post-form textarea {
   display: block;
   margin-bottom: 10px;
+  width: 100%;
+  padding: 5px;
+}
+
+.footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: gray;
+}
+
+@media (max-width: 800px) {
+  .container {
+    grid-template-columns: 10fr;
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .post-form input,
+  .post-form textarea {
+    width: 100%;
+  }
 }

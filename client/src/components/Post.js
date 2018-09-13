@@ -24,12 +24,11 @@ const Post = ({ post, vote, index }) => {
         </div>
         <div className="meta-area">
           <span className="time">
-            Submitted {moment(post.posted).fromNow()} by {post.author}
+            Submitted {moment(post.posted).fromNow()} by
+            <strong> {post.author}</strong>
           </span>
         </div>
-        <div className="link-area">
-          <span>5 comments share save hide give gold report crosspost</span>
-        </div>
+        <div className="link-area" />
       </div>
     </div>
   );

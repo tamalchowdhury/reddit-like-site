@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import Header from './components/Header';
 import Textbox from './components/Textbox';
 import Post from './components/Post';
 import User from './components/User';
@@ -138,7 +139,12 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <div className="header">Header</div>
+        <Header
+          username={this.state.username}
+          loggedIn={this.state.loggedIn}
+          login={this.login}
+          logout={this.logout}
+        />
         <div className="container">
           <div className="posts">
             {this.state.messages.map((post, index) => (
@@ -146,22 +152,31 @@ class App extends Component {
             ))}
           </div>
           <div className="user">
-            <div className="user-area">
-              {this.state.loggedIn ? (
-                <Fragment>
-                  <h3>Posting as {this.state.username}</h3>
-                  <button onClick={this.logout}>Logout</button>
-                </Fragment>
-              ) : null}
-            </div>
             {this.state.loggedIn ? (
               <Postbox newPost={this.newPost} />
             ) : (
-              <Login login={this.login} />
+              <div className="guest-msg">
+                <p>You can post something after signing up above ⬆️</p>
+              </div>
             )}
           </div>
         </div>
-        <div className="footer">Footer</div>
+        <div className="footer">
+          <p>
+            Reddit Clone in Node.js & React.js by{' '}
+            <a
+              href="https://tamalweb.com/work?from=reddit-clone"
+              target="_blank">
+              Tamal Anwar
+            </a>
+            &nbsp; | &nbsp;
+            <a
+              href="https://github.com/TamalAnwar/reddit-like-site"
+              target="_blank">
+              Source code
+            </a>
+          </p>
+        </div>
       </div>
     );
   }
