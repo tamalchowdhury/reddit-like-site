@@ -26,7 +26,7 @@ const Post = ({ post, vote, index }) => {
         </div>
         <div className="meta-area">
           <span className="time">
-            Submitted {moment(post.posted).fromNow()} by {post.author} to r/node
+            Submitted {moment(post.posted).fromNow()} by {post.author}
           </span>
         </div>
         <div className="link-area">

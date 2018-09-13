@@ -13,9 +13,21 @@ router.get('/all', async (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
-  req.session.cookie.username = req.body.username;
-  console.log(req.session);
-  res.sendStatus(200);
+  try {
+    req.session.cookie.username = req.body.username;
+    res.sendStatus(200);
+  } catch (error) {
+    res.sendStatus(403);
+  }
+});
+
+router.post('/logout', (req, res) => {
+  try {
+    req.session.destroy();
+    res.sendStatus(200);
+  } catch (error) {
+    res.sendStatus(403);
+  }
 });
 
 router.post('/post', async (req, res) => {

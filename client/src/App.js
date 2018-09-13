@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Textbox from './components/Textbox';
 import Post from './components/Post';
 import User from './components/User';
@@ -50,6 +50,17 @@ class App extends Component {
     }
 
     console.log('Logging in!');
+  };
+
+  logout = () => {
+    fetch('/api/logout', {
+      method: 'POST'
+    }).then((res) => {
+      if (res.status === 200) {
+        localStorage.removeItem('username');
+        this.setState({ username: '', loggedIn: false });
+      }
+    });
   };
 
   newPost = (e) => {
@@ -117,7 +128,10 @@ class App extends Component {
     fetch('./api/all')
       .then((res) => res.json())
       .then((messages) => {
-        this.setState({ username, messages, loggedIn: true, updated: true });
+        this.setState({ messages, updated: true });
+        if (username) {
+          this.setState({ username, loggedIn: true });
+        }
       });
   }
 
@@ -132,6 +146,14 @@ class App extends Component {
             ))}
           </div>
           <div className="user">
+            <div className="user-area">
+              {this.state.loggedIn ? (
+                <Fragment>
+                  <h3>Posting as {this.state.username}</h3>
+                  <button onClick={this.logout}>Logout</button>
+                </Fragment>
+              ) : null}
+            </div>
             {this.state.loggedIn ? (
               <Postbox newPost={this.newPost} />
             ) : (
