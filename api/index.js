@@ -12,12 +12,19 @@ router.get('/all', async (req, res) => {
   }
 });
 
+router.post('/signup', (req, res) => {
+  req.session.cookie.username = req.body.username;
+  console.log(req.session);
+  res.sendStatus(200);
+});
+
 router.post('/post', async (req, res) => {
   try {
     res.sendStatus(200);
     const post = new Post(req.body);
     await post.save();
   } catch (error) {
+    console.log('Error in here!' + error.message);
     res.sendStatus(403);
   }
 });

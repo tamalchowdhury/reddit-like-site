@@ -18,10 +18,6 @@ const postSchema = new mongoose.Schema({
   votes: {
     type: Number,
     default: 1
-  },
-  author: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'Author'
   }
 });
 

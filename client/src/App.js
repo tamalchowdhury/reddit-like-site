@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import Textbox from './components/Textbox';
 import Post from './components/Post';
+import User from './components/User';
 import Postbox from './components/Postbox';
+import Login from './components/Login';
+
 import './styles/style.css';
 import data from './newdata';
 
 class App extends Component {
   state = {
     messages: [],
+    loggedIn: false,
+    username: '',
     updated: false
   };
 
@@ -22,6 +27,31 @@ class App extends Component {
     }).then(this.setState({ updated: false }));
   }
 
+  login = (e) => {
+    e.preventDefault();
+    const username = e.target.username.value;
+
+    if (username) {
+      fetch('/api/signup', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username })
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            this.setState({ loggedIn: true, username });
+            localStorage.setItem('username', username);
+          }
+        })
+        .catch((e) => null);
+    }
+
+    console.log('Logging in!');
+  };
+
   newPost = (e) => {
     e.preventDefault();
     let title = e.target.title.value;
@@ -31,7 +61,7 @@ class App extends Component {
       let data = {};
       data.title = title;
       data.body = body;
-      data.author = 'Me';
+      data.author = this.state.username || 'User';
       data.posted = Date.now();
       data.votes = 1;
 
@@ -82,10 +112,12 @@ class App extends Component {
   }
 
   componentDidMount() {
+    let username = localStorage.getItem('username') || '';
+
     fetch('./api/all')
       .then((res) => res.json())
       .then((messages) => {
-        this.setState({ messages, updated: true });
+        this.setState({ username, messages, loggedIn: true, updated: true });
       });
   }
 
@@ -100,7 +132,11 @@ class App extends Component {
             ))}
           </div>
           <div className="user">
-            <Postbox newPost={this.newPost} />
+            {this.state.loggedIn ? (
+              <Postbox newPost={this.newPost} />
+            ) : (
+              <Login login={this.login} />
+            )}
           </div>
         </div>
         <div className="footer">Footer</div>

@@ -6,6 +6,10 @@ const routes = require('./api');
 const mongoose = require('mongoose');
 require('dotenv').config({ path: '.env' });
 
+// Session
+const session = require('express-session');
+app.use(session({ secret: process.env.SECRET }));
+
 mongoose.connect(process.env.DATABASE);
 mongoose.Promise = global.Promise;
 mongoose.connection.on('error', (err) => {
@@ -18,6 +22,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Static files
 app.use(express.static(path.join(__dirname, 'client', 'build')));
+
+// Sending the user to locals
+app.use((req, res, next) => {
+  res.locals.username = req.session.cookie.username || null;
+  next();
+});
 
 // Serving the final build file from React/build
 app.get('/', (req, res) => {

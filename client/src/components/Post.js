@@ -17,13 +17,12 @@ const Post = ({ post, vote, index }) => {
           </span>
         </div>
       </div>
-      <div className="media">Some image</div>
+
       <div className="content">
         <div className="title-area">
           <span className="title">
             <a href="#">{post.title} </a>
           </span>
-          <span className="url">(domain)</span>
         </div>
         <div className="meta-area">
           <span className="time">
