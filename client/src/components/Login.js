@@ -5,7 +5,7 @@ const Login = ({ login }) => {
     <div className="post-box">
       <h4>Pick a Display Name:</h4>
       <form method="POST" className="post-form" onSubmit={login}>
-        <input type="text" name="username" />
+        <input type="text" name="username" required />
         <button>Signup!</button>
       </form>
     </div>

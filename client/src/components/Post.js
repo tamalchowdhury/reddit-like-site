@@ -20,9 +20,7 @@ const Post = ({ post, vote, index }) => {
 
       <div className="content">
         <div className="title-area">
-          <span className="title">
-            <a href="#">{post.title} </a>
-          </span>
+          <span className="title">{post.title}</span>
         </div>
         <div className="meta-area">
           <span className="time">
