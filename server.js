@@ -6,6 +6,10 @@ const routes = require('./api');
 const mongoose = require('mongoose');
 require('dotenv').config({ path: '.env' });
 
+// HelmetJS
+const helmet = require('helmet');
+app.use(helmet());
+
 // Session
 const session = require('express-session');
 app.use(session({ secret: process.env.SECRET }));
