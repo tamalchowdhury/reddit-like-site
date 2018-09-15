@@ -23,12 +23,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Static files
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-// Sending the user to locals
-app.use((req, res, next) => {
-  res.locals.username = req.session.cookie.username || null;
-  next();
-});
-
 // Serving the final build file from React/build
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
