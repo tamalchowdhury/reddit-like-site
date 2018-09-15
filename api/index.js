@@ -4,7 +4,7 @@ const Post = require('../models/Post');
 router.get('/all', async (req, res) => {
   try {
     const posts = await Post.find({})
-      .limit(25)
+      .limit(100)
       .sort({ posted: -1 });
     res.send(posts);
   } catch (error) {

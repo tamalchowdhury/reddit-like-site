@@ -9,4 +9,15 @@ You will need to rename `sample.env` file to just `.env` and supply your own mon
 
 To start the server, run `npm run dev` or `yarn run dev`
 
-Work in progress..
+## To Do
+
+- Add option to display the text body under the posts
+- Allow comments
+- Allow only one upvote/downvote per user
+- Add option to load more posts
+
+## Improvements from Next Projects
+
+- Use git version control and branches to streamline development
+- Write more documentation
+- Seperate the API calls into different components, so the codebase will become more mangable.
