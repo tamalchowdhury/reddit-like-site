@@ -13,6 +13,7 @@ import data from './newdata';
 class App extends Component {
   state = {
     messages: [],
+    initialLoad: false,
     loggedIn: false,
     username: '',
     updated: false
@@ -137,7 +138,7 @@ class App extends Component {
     fetch('./api/all')
       .then((res) => res.json())
       .then((messages) => {
-        this.setState({ messages, updated: true });
+        this.setState({ messages, updated: true, initialLoad: true });
         if (username) {
           this.setState({ username, loggedIn: true });
         }
@@ -155,9 +156,20 @@ class App extends Component {
         />
         <div className="container">
           <div className="posts">
-            {this.state.messages.map((post, index) => (
-              <Post key={post._id} index={index} post={post} vote={this.vote} />
-            ))}
+            {!this.state.initialLoad ? (
+              <div className="center">
+                <img src={loading} alt="Loading" width="100px" height="100px" />
+              </div>
+            ) : (
+              this.state.messages.map((post, index) => (
+                <Post
+                  key={post._id}
+                  index={index}
+                  post={post}
+                  vote={this.vote}
+                />
+              ))
+            )}
           </div>
           <div className="user">
             {this.state.loggedIn ? (
