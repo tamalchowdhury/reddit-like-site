@@ -13,6 +13,10 @@ a {
   text-decoration: none;
 }
 
+.center {
+  text-align: center;
+}
+
 .app {
   background: #ffffff;
   width: 1000px;

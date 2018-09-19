@@ -5,6 +5,7 @@ import Post from './components/Post';
 import User from './components/User';
 import Postbox from './components/Postbox';
 import Login from './components/Login';
+import loading from '../src/img/loading.gif';
 
 import './styles/style.css';
 import data from './newdata';
