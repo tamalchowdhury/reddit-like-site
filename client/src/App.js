@@ -16,7 +16,8 @@ class App extends Component {
     initialLoad: false,
     loggedIn: false,
     username: '',
-    updated: false
+    updated: false,
+    nothing: ''
   };
 
   postToDatabase(post) {
