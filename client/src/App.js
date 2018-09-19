@@ -25,7 +25,11 @@ class App extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(post)
-    }).then(this.setState({ updated: false }));
+    })
+      .then((res) => {
+        // Do something with the response
+      })
+      .then(this.setState({ updated: false }));
   }
 
   login = (e) => {
@@ -119,6 +123,9 @@ class App extends Component {
         .then((res) => res.json())
         .then((messages) => {
           this.setState({ messages, updated: true });
+        })
+        .catch((err) => {
+          this.setState({ updated: true });
         });
     }
   }

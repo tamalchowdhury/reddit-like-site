@@ -15,6 +15,10 @@ To start the server, run `npm run dev` or `yarn run dev`
 
 I deployed a branch of this code into Heroku. After deploying and setting up the env variables, the site was showing **Not Found** error. I realized that the `/build/` folder was being ignored in .gitignore. So after pushing it to the repo, it now works fine.
 
+## Notes after sharing on the dev community
+
+People right out started spamming the site. People posted content with unreasonable amount of data beyond the limit. Someone started posting NiggerNiggerNigger.. and flodded my database. They did this because it can be done. So it's my turn to make it a bit more secure.
+
 ## To Do
 
 - Add option to display the text body under the posts

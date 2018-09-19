@@ -7,6 +7,7 @@ const Login = ({ login }) => {
         type="text"
         name="username"
         placeholder="Pick a display name"
+        maxLength="20"
         required
       />
       <button>Signup!</button>

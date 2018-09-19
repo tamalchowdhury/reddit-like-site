@@ -1,60 +1,22 @@
 const router = require('express').Router();
 const Post = require('../models/Post');
+const appController = require('../controllers/appController');
 
-router.get('/all', async (req, res) => {
-  try {
-    const posts = await Post.find({})
-      .limit(100)
-      .sort({ posted: -1 });
-    res.send(posts);
-  } catch (error) {
-    res.sendStatus(404);
-  }
-});
+// GET all posts in the runtime
+router.get('/all', appController.getAll);
 
-router.post('/signup', (req, res) => {
-  try {
-    req.session.cookie.username = req.body.username;
-    res.sendStatus(200);
-  } catch (error) {
-    res.sendStatus(403);
-  }
-});
+// Signup for a username
+router.post('/signup', appController.signup);
 
-router.post('/logout', (req, res) => {
-  try {
-    req.session.destroy();
-    res.sendStatus(200);
-  } catch (error) {
-    res.sendStatus(403);
-  }
-});
+// Logout
+router.post('/logout', appController.logout);
 
-router.post('/post', async (req, res) => {
-  try {
-    res.sendStatus(200);
-    const post = new Post(req.body);
-    await post.save();
-  } catch (error) {
-    console.log('Error in here!' + error.message);
-    res.sendStatus(403);
-  }
-});
+// POST an update
+// NEEDS verification
+router.post('/post', appController.generalValidation, appController.postUpdate);
 
-router.post('/vote', async (req, res) => {
-  try {
-    const post = await Post.findOneAndUpdate({ _id: req.body.id }, req.body, {
-      new: true,
-      runValidators: true
-    });
-    // res.sendStatus(200);
-    res.json(req.body);
-  } catch (error) {
-    if (error) {
-      console.log(error.message);
-    }
-    res.sendStatus(404);
-  }
-});
+// POST vote
+// NEEDS verification
+router.post('/vote', appController.checkVotes, appController.vote);
 
 module.exports = router;
