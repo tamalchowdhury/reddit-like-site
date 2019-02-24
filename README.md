@@ -1,6 +1,7 @@
 # Simple Reddit Site
 
-Heroku link: https://reddit-like-site.herokuapp.com/
+[Live Demo](https://reddit-like-site.herokuapp.com/)
+[Blog Post: Thoughts after Building a Reddit Clone in MERN (Node & React)](https://tamalweb.com/thoughts-after-building-a-reddit-clone-in-mern-node-react)
 
 ## Installation
 
