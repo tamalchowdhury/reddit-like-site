@@ -1,6 +1,6 @@
 # Simple Reddit Site
 
-[Live Demo](https://reddit-like-site.herokuapp.com/)
+[New version 2.0](https://github.com/TamalAnwar/reddit-clone-20/) https://github.com/TamalAnwar/reddit-clone-20
 
 [Blog Post: Thoughts after Building a Reddit Clone in MERN (Node & React)](https://tamalweb.com/thoughts-after-building-a-reddit-clone-in-mern-node-react)
 
